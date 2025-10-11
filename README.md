@@ -81,7 +81,22 @@ Sistem ini merupakan aplikasi berbasis web yang dibangun menggunakan Flask untuk
 1. Isi dahulu halaman "Kelas". <br>
 2. Isi halaman "SPP". <br>
 2. Isi halaman "Siswa". <br>
-3. Isi halaman "Pembayaran". <br>
+3. Isi halaman "Pembayaran".
+
+<h2> Fitur </h2>
+1. Manajemen data siswa dan kelas. <br>
+2. Input dan edit nominal SPP. <br>
+3. Pencatatan transaksi pembayaran. <br>
+4. Tampilan kwitansi pembayaran. <br>
+5. Login khusus admin. <br>
+6. Antarmuka berbasis HTML dan template Flask.
+
+<h2> Tujuan Penggunaan </h2>
+<p>
+  Proyek ini bersifat open-source dan dapat digunakan untuk keperluan edukasi, pengembangan, atau modifikasi sesuai kebutuhan.
+</p>
+
+
 
 
 
