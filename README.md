@@ -91,10 +91,14 @@ Sistem ini merupakan aplikasi berbasis web yang dibangun menggunakan Flask untuk
 5. Login khusus admin. <br>
 6. Antarmuka berbasis HTML dan template Flask.
 
-<h2> Tujuan Penggunaan </h2>
+<h2> Ketentuan Lainnya </h2>
 <p>
   Proyek ini bersifat open-source dan dapat digunakan untuk keperluan edukasi, pengembangan, atau modifikasi sesuai kebutuhan.
 </p>
+
+<h2> Lainnya </h2>
+Soon....<br>
+
 
 
 
