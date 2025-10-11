@@ -67,5 +67,17 @@ Sistem ini merupakan aplikasi berbasis web yang dibangun menggunakan Flask untuk
 
 ![Dashboard](dashboard.PNG) <br>
 
+<h2> Struktur Folder </h2>
+├── __pycache__/ <br>
+├── instance/ <br>
+├── static/ <br>
+├── templates/ <br>
+├── app.py <br>
+├── database.db <br>
+├── requirements.txt <br>
+├── README.md <br>
+
+
+
 
 
