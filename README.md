@@ -32,7 +32,7 @@ Sistem ini merupakan aplikasi berbasis web yang dibangun menggunakan Flask untuk
 <p> Usernane: admin </p>
 <p> Password: admin123 </p>
 
-<h2>Tampilan</h2>
+<h2> Hasil Konsep Tampilan </h2>
 
 <h4>🖼️ Tampilan Login</h4> 
 
@@ -62,5 +62,10 @@ Sistem ini merupakan aplikasi berbasis web yang dibangun menggunakan Flask untuk
 ![TambahPembayaran](TampilanDataTambahPembayaran.PNG) <br>
 ![EditPembayaran](TampilanEditDataPembayaran.PNG) <br>
 ![KwitansiPembayaran](TampilanKwitansiPembayaran.PNG)
+
+<h4>🖼️ Dashboard </h4> 
+
+![Dashboard](dashboard.PNG) <br>
+
 
 
