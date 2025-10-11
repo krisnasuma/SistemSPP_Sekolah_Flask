@@ -32,4 +32,35 @@ Sistem ini merupakan aplikasi berbasis web yang dibangun menggunakan Flask untuk
 <p> Usernane: admin </p>
 <p> Password: admin123 </p>
 
-<h2></h2>
+<h2>Tampilan</h2>
+
+<h4>🖼️ Tampilan Login</h4> 
+
+![Login](LoginByAdminOnly.PNG)
+
+<h4>🖼️ Tampilan Kelas</h4> 
+
+![Kelas](TampilanKelas.PNG) <br>
+![TambahKelas](TampilanTambahKelas.PNG) <br>
+![EditKelas](TampilanEditKelas.PNG)
+
+<h4>🖼️ Tampilan Siswa</h4> 
+
+![Siswa](TampilanSiswa.PNG) <br>
+![TambahSiswa](TampilanTambahSiswa.PNG) <br>
+![EditSiswa](TampilanEditSiswa.PNG)
+
+<h4>🖼️ Tampilan SPP</h4> 
+
+![SPP](TampilanDataSPP.PNG) <br>
+![TambahSPP](TampilanTambahDataSPP.PNG) <br>
+![EditSPP](TampilanEditDataSPP.PNG)
+
+<h4>🖼️ Tampilan Pembayaran</h4> 
+
+![Pembayaran](TampilanDataPembayaran.PNG) <br>
+![TambahPembayaran](TampilanDataTambahPembayaran.PNG) <br>
+![EditPembayaran](TampilanEditDataPembayaran.PNG) <br>
+![KwitansiPembayaran](TampilanKwitansiPembayaran.PNG)
+
+
