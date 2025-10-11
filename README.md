@@ -77,6 +77,14 @@ Sistem ini merupakan aplikasi berbasis web yang dibangun menggunakan Flask untuk
 ├── requirements.txt <br>
 ├── README.md <br>
 
+<h4> Alur Penggunaan </h4>
+1. Isi dahulu halaman "Kelas". <br>
+2. Isi halaman "SPP". <br>
+2. Isi halaman "Siswa". <br>
+3. Isi halaman "Pembayaran". <br>
+
+
+
 
 
 
