@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+{% block title %}Data Pembayaran{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h2>Data Pembayaran</h2>
+    <a href="{{ url_for('tambah_pembayaran') }}" class="btn btn-primary">
+        <i class="bi bi-plus-circle"></i> Tambah Pembayaran
+    </a>
+</div>
+
+<!-- Form pencarian -->
+<div class="card mb-4">
+    <div class="card-body">
+        <form method="GET" action="{{ url_for('pembayaran') }}">
+            <div class="input-group">
+                <input type="text" class="form-control" name="search" 
+                       placeholder="Cari pembayaran (Nama/Bulan/Tahun/Nota)" value="{{ keyword }}">
+                <button class="btn btn-primary" type="submit">
+                    <i class="bi bi-search"></i> Cari
+                </button>
+                {% if keyword %}
+                <a href="{{ url_for('pembayaran') }}" class="btn btn-outline-secondary">
+                    <i class="bi bi-x-circle"></i> Reset
+                </a>
+                {% endif %}
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- Info hasil pencarian -->
+{% if keyword %}
+<div class="alert alert-info mb-3">
+    Hasil pencarian untuk: <strong>{{ keyword }}</strong> | 
+    Ditemukan: {{ pembayaran|length }} data
+</div>
+{% endif %}
+
+
+<div class="table-responsive">
+    <table class="table table-striped">
+        <!-- Di tabel daftar pembayaran, tambahkan kolom-kolom baru -->
+<thead>
+    <tr>
+        <th>No. Nota</th>
+        <th>Siswa</th>
+        <th>Bulan/Tahun</th>
+        
+        <th>Total</th>
+        <th>Aksi</th>
+    </tr>
+</thead>
+<tbody>
+    {% for p in pembayaran %}
+    <tr>
+        <td>{{ p.no_nota }}</td>
+        <td>{{ p.siswa.nama }}</td>
+        <td>{{ p.bulan }} {{ p.tahun }}</td>
+        
+        <td><strong>Rp{{ "{:,.0f}".format(p.jumlah + p.daycare + p.extend_hour + p.excul + p.bimbel) }}</strong></td>
+        <td>
+            <a href="{{ url_for('edit_pembayaran', id=p.id) }}" class="btn btn-sm btn-warning">Edit</a>
+            <a href="{{ url_for('cetak_kwitansi', id=p.id) }}" class="btn btn-sm btn-info">Kwitansi</a>
+            <form action="{{ url_for('hapus_pembayaran', id=p.id) }}" method="POST" style="display: inline;">
+                <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Hapus data pembayaran?')">Hapus</button>
+            </form>
+        </td>
+    </tr>
+    {% endfor %}
+</tbody>
+    </table>
+</div>
+{% endblock %}

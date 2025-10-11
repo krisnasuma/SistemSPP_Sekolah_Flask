@@ -1,0 +1,171 @@
+{% extends "base.html" %}
+{% block title %}Kwitansi Pembayaran{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="kwitansi-container" id="kwitansi-print">
+        <div class="text-center mb-4">
+            <h3>BUKTI PEMBAYARAN</h3>
+            <h5>SEKOLAH ABC DAN DAY CARE</h5>
+            <p class="mb-0">Jl. Pendidikan No. 123, Jakarta</p>
+            <p>Telp: (021) 12345678</p>
+        </div>
+
+        <div class="kwitansi-header">
+            <div class="row">
+                <div class="col-md-6">
+                    <table class="table table-borderless">
+                        <tr>
+                            <th width="40%">No. Kwitansi</th>
+                            <td>: {{ pembayaran.no_nota }}</td>
+                        </tr>
+                        <tr>
+                            <th>Tanggal</th>
+                            <td>: {{ pembayaran.tanggal_bayar.strftime('%d/%m/%Y') }}</td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="col-md-6">
+                    <table class="table table-borderless">
+                        <tr>
+                            <th width="40%">Nama Siswa</th>
+                            <td>: {{ pembayaran.siswa.nama }}</td>
+                        </tr>
+
+                        <tr>
+                            <th>Kelas</th>
+                            <td>: {{ kelas_siswa }}</td>
+                        </tr>
+
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="kwitansi-body">
+            <table class="table table-bordered">
+                <thead class="table-light">
+                    <tr>
+                        <th>URAIAN</th>
+                        <th>JUMLAH</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>SPP {{ pembayaran.bulan }} {{ pembayaran.tahun }}</td>
+                        <td class="text-end">Rp{{ "{:,.0f}".format(pembayaran.jumlah) }}</td>
+                    </tr>
+                    {% if pembayaran.daycare > 0 %}
+                    <tr>
+                        <td>Day Care</td>
+                        <td class="text-end">Rp{{ "{:,.0f}".format(pembayaran.daycare) }}</td>
+                    </tr>
+                    {% endif %}
+                    {% if pembayaran.extend_hour > 0 %}
+                    <tr>
+                        <td>Extend Hour</td>
+                        <td class="text-end">Rp{{ "{:,.0f}".format(pembayaran.extend_hour) }}</td>
+                    </tr>
+                    {% endif %}
+                    {% if pembayaran.excul > 0 %}
+                    <tr>
+                        <td>Ekstrakurikuler</td>
+                        <td class="text-end">Rp{{ "{:,.0f}".format(pembayaran.excul) }}</td>
+                    </tr>
+                    {% endif %}
+                    {% if pembayaran.bimbel > 0 %}
+                    <tr>
+                        <td>Bimbel</td>
+                        <td class="text-end">Rp{{ "{:,.0f}".format(pembayaran.bimbel) }}</td>
+                    </tr>
+                    {% endif %}
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <th>TOTAL PEMBAYARAN</th>
+                        <th class="text-end">Rp{{ "{:,.0f}".format(pembayaran.jumlah + pembayaran.daycare + pembayaran.extend_hour + pembayaran.excul + pembayaran.bimbel) }}</th>
+                    </tr>
+                    <tr>
+                        <!--<td colspan="2">-->
+                            <!--<em>Terbilang: {{ terbilang }} Rupiah</em>-->
+                        <!--</td>-->
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+
+        <div class="kwitansi-footer mt-4">
+            <div class="row">
+                <div class="col-md-6">
+                    <p><center>Keterangan:<br>
+                    {{ pembayaran.keterangan if pembayaran.keterangan else '-' }}</center></p>
+                </div>
+                <div class="col-md-6 text-end">
+                    <div class="ttd-area">
+                        <p><center>Jakarta, {{ tanggal_sekarang.strftime('%d %B %Y') }}</center></p>
+                        <br>
+                        <!--<div class="ttd-space" style="height: 80px;"></div>-->
+                        <p><center>(__________________________)</center></p>
+                        <p><center>Petugas</center></p>
+                        <!--<p>{{ current_user.nama_lengkap }}</p>-->
+                        <!--<p>{{ current_user.level|capitalize }}</p>-->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="text-center mt-4 no-print">
+        <button onclick="window.print()" class="btn btn-primary">
+            <i class="bi bi-printer"></i> Cetak Kwitansi
+        </button>
+        <a href="{{ url_for('pembayaran') }}" class="btn btn-secondary ms-2">
+            Kembali ke Daftar Pembayaran
+        </a>
+    </div>
+</div>
+
+<style>
+    .kwitansi-container {
+        background-color: white;
+        padding: 20px;
+        border: 1px solid #ddd;
+        max-width: 800px;
+        margin: 0 auto;
+    }
+    
+    .kwitansi-header {
+        margin-bottom: 20px;
+    }
+    
+    .kwitansi-body {
+        margin-bottom: 30px;
+    }
+    
+    .ttd-space {
+        border-bottom: 1px solid #000;
+        width: 200px;
+        margin: 0 auto;
+    }
+    
+    @media print {
+        body * {
+            visibility: hidden;
+        }
+        .kwitansi-container, .kwitansi-container * {
+            visibility: visible;
+        }
+        .kwitansi-container {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            border: none;
+            padding: 0;
+        }
+        .no-print {
+            display: none !important;
+        }
+    }
+</style>
+{% endblock %}

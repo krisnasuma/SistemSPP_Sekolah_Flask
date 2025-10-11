@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block title %}Tambah Kelas{% endblock %}
+
+{% block content %}
+<div class="card">
+    <div class="card-header">
+        <h4>Tambah Kelas Baru</h4>
+    </div>
+    <div class="card-body">
+        <form method="POST">
+            <div class="mb-3">
+                <label class="form-label">Nama Kelas</label>
+                <input type="text" class="form-control" name="nama_kelas" required>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Tingkat</label>
+                <select class="form-select" name="tingkat" required>
+                    <option value="REGULER">REGULER</option>
+                    <option value="PRE-SCHOOL">PRE-SCHOOL</option>
+                    <option value="DAYCARE">DAYCARE</option>
+                    <option value="TK A">TK A</option>
+                    <option value="TK B">TK B</option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Wali Kelas</label>
+                <input type="text" class="form-control" name="wali_kelas">
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Keterangan</label>
+                <textarea class="form-control" name="keterangan" rows="2"></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Simpan</button>
+            <a href="{{ url_for('kelas') }}" class="btn btn-secondary">Batal</a>
+        </form>
+    </div>
+</div>
+{% endblock %}

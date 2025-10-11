@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+{% block title %}Manajemen Kelas{% endblock %}
+
+
+
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h2>Data Kelas</h2>
+    <a href="{{ url_for('tambah_kelas') }}" class="btn btn-primary">
+        <i class="bi bi-plus-circle"></i> Tambah Kelas
+    </a>
+</div>
+
+<!-- Form pencarian -->
+<div class="card mb-4">
+    <div class="card-body">
+        <form method="GET" action="{{ url_for('kelas') }}">
+            <div class="input-group">
+                <input type="text" class="form-control" name="search" 
+                       placeholder="Cari kelas (Nama/Tingkat/Wali)" value="{{ keyword }}">
+                <button class="btn btn-primary" type="submit">
+                    <i class="bi bi-search"></i> Cari
+                </button>
+                {% if keyword %}
+                <a href="{{ url_for('kelas') }}" class="btn btn-outline-secondary">
+                    <i class="bi bi-x-circle"></i> Reset
+                </a>
+                {% endif %}
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- Info hasil pencarian -->
+{% if keyword %}
+<div class="alert alert-info mb-3">
+    Hasil pencarian untuk: <strong>{{ keyword }}</strong> | 
+    Ditemukan: {{ kelas|length }} data
+</div>
+{% endif %}
+
+<div class="table-responsive">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Nama Kelas</th>
+                <th>Tingkat</th>
+                <th>Wali Kelas</th>
+                <th>Jumlah Siswa</th>
+                <th>Aksi</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for k in kelas %}
+            <tr>
+                <td>{{ k.nama_kelas }}</td>
+                <td>{{ k.tingkat }}</td>
+                <td>{{ k.wali_kelas }}</td>
+                <td>{{ k.jumlah_siswa }}</td>
+                <td>
+                    <a href="{{ url_for('edit_kelas', id=k.id) }}" class="btn btn-sm btn-warning">
+                        <i class="bi bi-pencil"></i>
+                    </a>
+                    <form action="{{ url_for('hapus_kelas', id=k.id) }}" method="POST" style="display: inline;">
+                        <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Hapus kelas ini?')">
+                            <i class="bi bi-trash"></i>
+                        </button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block title %}Tambah SPP{% endblock %}
+
+{% block content %}
+<h2 class="mb-4">Tambah Data SPP</h2>
+
+<form method="POST">
+    <div class="mb-3">
+        <label for="tahun_ajaran" class="form-label">Tahun Ajaran</label>
+        <input type="text" class="form-control" id="tahun_ajaran" name="tahun_ajaran" required>
+    </div>
+    <div class="mb-3">
+        <label for="nominal" class="form-label">Nominal</label>
+        <input type="number" class="form-control" id="nominal" name="nominal" required>
+    </div>
+    <div class="mb-3">
+        <label for="keterangan" class="form-label">Keterangan</label>
+        <textarea class="form-control" id="keterangan" name="keterangan" rows="3"></textarea>
+    </div>
+    <button type="submit" class="btn btn-primary">Simpan</button>
+    <a href="{{ url_for('spp') }}" class="btn btn-secondary">Batal</a>
+</form>
+{% endblock %}

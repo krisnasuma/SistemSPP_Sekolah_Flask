@@ -1,0 +1,127 @@
+{% extends "base.html" %}
+{% block title %}Edit Pembayaran{% endblock %}
+
+{% block content %}
+<div class="card">
+    <div class="card-header">
+        <h4>Edit Pembayaran</h4>
+        <p class="text-muted">No. Nota: {{ pembayaran.no_nota }}</p>
+    </div>
+    <div class="card-body">
+        <form method="POST">
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <label class="form-label">Siswa</label>
+                    <select class="form-select" name="nis" required>
+                        {% for s in siswa %}
+                        <option value="{{ s.nis }}" {% if s.nis == pembayaran.nis %}selected{% endif %}>
+                            {{ s.nis }} - {{ s.nama }}
+                        </option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label">SPP</label>
+                    <select class="form-select" name="id_spp" required>
+                        {% for sp in spp %}
+                        <option value="{{ sp.id }}" {% if sp.id == pembayaran.id_spp %}selected{% endif %}>
+                            {{ sp.tahun_ajaran }} - Rp{{ "{:,.0f}".format(sp.nominal) }}
+                        </option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                <div class="col-md-3">
+                    <label class="form-label">Bulan</label>
+                    <input type="text" class="form-control" name="bulan" value="{{ pembayaran.bulan }}" required>
+                </div>
+                <div class="col-md-3">
+                    <label class="form-label">Tahun</label>
+                    <input type="text" class="form-control" name="tahun" value="{{ pembayaran.tahun }}" required>
+                </div>
+                <div class="col-md-3">
+                    <label class="form-label">Tanggal Bayar</label>
+                    <!--<input type="date" class="form-control" name="tanggal_bayar" value="{{ pembayaran.tanggal_bayar }}" required>-->
+                    <input type="date" class="form-control" name="tanggal_bayar" value="{{ pembayaran.tanggal_bayar.strftime('%Y-%m-%d') if pembayaran.tanggal_bayar else '' }}" required>
+                </div>
+                <div class="col-md-3">
+                    <label class="form-label">SPP Pokok</label>
+                    <input type="number" class="form-control" name="jumlah" value="{{ pembayaran.jumlah }}" required>
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                <div class="col-md-3">
+                    <label class="form-label">Day Care</label>
+                    <input type="number" class="form-control" name="daycare" value="{{ pembayaran.daycare }}">
+                </div>
+                <div class="col-md-3">
+                    <label class="form-label">Extend Hour</label>
+                    <input type="number" class="form-control" name="extend_hour" value="{{ pembayaran.extend_hour }}">
+                </div>
+                <div class="col-md-3">
+                    <label class="form-label">Ekstrakurikuler</label>
+                    <input type="number" class="form-control" name="excul" value="{{ pembayaran.excul }}">
+                </div>
+                <div class="col-md-3">
+                    <label class="form-label">Bimbel</label>
+                    <input type="number" class="form-control" name="bimbel" value="{{ pembayaran.bimbel }}">
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                <div class="col-md-4">
+                    <label class="form-label">Metode Pembayaran</label>
+                    <select class="form-select" name="metode_pembayaran">
+                        <option value="tunai" {% if pembayaran.metode_pembayaran == 'tunai' %}selected{% endif %}>Tunai</option>
+                        <option value="transfer" {% if pembayaran.metode_pembayaran == 'transfer' %}selected{% endif %}>Transfer</option>
+                        <option value="lainnya" {% if pembayaran.metode_pembayaran == 'lainnya' %}selected{% endif %}>Lainnya</option>
+                    </select>
+                </div>
+                <div class="col-md-4">
+                    <label class="form-label">Status</label>
+                    <select class="form-select" name="status" required>
+                        <option value="lunas" {% if pembayaran.status == 'lunas' %}selected{% endif %}>Lunas</option>
+                        <option value="belum lunas" {% if pembayaran.status == 'belum lunas' %}selected{% endif %}>Belum Lunas</option>
+                        <option value="cicil" {% if pembayaran.status == 'cicil' %}selected{% endif %}>Cicil</option>
+                    </select>
+                </div>
+                <div class="col-md-4">
+                    <label class="form-label">Total</label>
+                    <input type="text" class="form-control" value="Rp{{ "{:,.0f}".format(pembayaran.jumlah + pembayaran.daycare + pembayaran.extend_hour + pembayaran.excul + pembayaran.bimbel) }}" readonly>
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Keterangan</label>
+                <textarea class="form-control" name="keterangan" rows="2">{{ pembayaran.keterangan }}</textarea>
+            </div>
+
+            <div class="d-flex justify-content-between">
+                <a href="{{ url_for('pembayaran') }}" class="btn btn-secondary">Kembali</a>
+                <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+    // Auto calculate total when any payment field changes
+    document.querySelectorAll('input[name="jumlah"], input[name="daycare"], input[name="extend_hour"], input[name="excul"], input[name="bimbel"]').forEach(input => {
+        input.addEventListener('change', updateTotal);
+    });
+    
+    function updateTotal() {
+        const jumlah = parseFloat(document.querySelector('input[name="jumlah"]').value) || 0;
+        const daycare = parseFloat(document.querySelector('input[name="daycare"]').value) || 0;
+        const extend = parseFloat(document.querySelector('input[name="extend_hour"]').value) || 0;
+        const excul = parseFloat(document.querySelector('input[name="excul"]').value) || 0;
+        const bimbel = parseFloat(document.querySelector('input[name="bimbel"]').value) || 0;
+        
+        const total = jumlah + daycare + extend + excul + bimbel;
+        document.querySelector('input[readonly]').value = 'Rp' + total.toLocaleString('id-ID');
+    }
+</script>
+{% endblock %}

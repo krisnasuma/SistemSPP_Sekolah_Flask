@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+{% block title %}Data SPP{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h2>Data SPP</h2>
+    <a href="{{ url_for('tambah_spp') }}" class="btn btn-primary">
+        <i class="bi bi-plus-circle"></i> Tambah SPP
+    </a>
+</div>
+
+<!-- Form pencarian -->
+<div class="card mb-4">
+    <div class="card-body">
+        <form method="GET" action="{{ url_for('spp') }}">
+            <div class="input-group">
+                <input type="text" class="form-control" name="search" 
+                       placeholder="Cari SPP (Tahun Ajaran/Keterangan)" value="{{ keyword }}">
+                <button class="btn btn-primary" type="submit">
+                    <i class="bi bi-search"></i> Cari
+                </button>
+                {% if keyword %}
+                <a href="{{ url_for('spp') }}" class="btn btn-outline-secondary">
+                    <i class="bi bi-x-circle"></i> Reset
+                </a>
+                {% endif %}
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- Info hasil pencarian -->
+{% if keyword %}
+<div class="alert alert-info mb-3">
+    Hasil pencarian untuk: <strong>{{ keyword }}</strong> | 
+    Ditemukan: {{ spp|length }} data
+</div>
+{% endif %}
+
+<div class="table-responsive">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Tahun Ajaran</th>
+                <th>Nominal</th>
+                <th>Keterangan</th>
+                <th>Aksi</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for s in spp %}
+            <tr>
+                <td>{{ s.id }}</td>
+                <td>{{ s.tahun_ajaran }}</td>
+                <td>Rp {{ "{:,.0f}".format(s.nominal) }}</td>
+                <td>{{ s.keterangan }}</td>
+                <td>
+                    <a href="{{ url_for('edit_spp', id=s.id) }}" class="btn btn-sm btn-warning">Edit</a>
+                    <form action="{{ url_for('hapus_spp', id=s.id) }}" method="POST" style="display: inline;">
+                        <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Yakin ingin menghapus?')">Hapus</button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
