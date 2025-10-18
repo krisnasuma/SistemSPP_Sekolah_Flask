@@ -91,6 +91,11 @@ Sistem ini merupakan aplikasi berbasis web yang dibangun menggunakan Flask untuk
 5. Login khusus admin. <br>
 6. Antarmuka berbasis HTML dan template Flask.
 
+<h2> Teknologi </h2>
+1. Flask (Python)
+2. Sqlite (Database)
+3. Bootstrap (HTML, CSS, Javascript Framework)
+
 <h2> Ketentuan Lainnya </h2>
 <p>
   Proyek ini bersifat open-source dan dapat digunakan untuk keperluan edukasi, pengembangan, atau modifikasi sesuai kebutuhan.
@@ -98,6 +103,7 @@ Sistem ini merupakan aplikasi berbasis web yang dibangun menggunakan Flask untuk
 
 <h2> Lainnya </h2>
 Soon....<br>
+
 
 
 
