@@ -92,8 +92,8 @@ Sistem ini merupakan aplikasi berbasis web yang dibangun menggunakan Flask untuk
 6. Antarmuka berbasis HTML dan template Flask.
 
 <h2> Teknologi </h2>
-1. Flask (Python)
-2. Sqlite (Database)
+1. Flask (Python) <br>
+2. Sqlite (Database) <br>
 3. Bootstrap (HTML, CSS, Javascript Framework)
 
 <h2> Ketentuan Lainnya </h2>
@@ -103,6 +103,7 @@ Sistem ini merupakan aplikasi berbasis web yang dibangun menggunakan Flask untuk
 
 <h2> Lainnya </h2>
 Soon....<br>
+
 
 
 
